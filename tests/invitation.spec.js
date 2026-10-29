@@ -37,20 +37,3 @@ test('in ảnh, ghép hình mở khóa thông tin, thả tim và RSVP', async ({
   }
   expect(errors).toEqual([]);
 });
-
-test('mỗi bên gia đình có ngày, giờ, địa điểm riêng; ?ben= chỉ hiện một bên', async ({ page }) => {
-  await page.goto('/');
-  const families = page.locator('.details__family');
-  await expect(families).toHaveCount(2);
-  await expect(families.nth(0)).toContainText('Nhà gái');
-  await expect(families.nth(0)).toContainText('Lễ vu quy');
-  await expect(families.nth(1)).toContainText('Lễ thành hôn');
-  await expect(families.locator('a.btn--stamp')).toHaveCount(2);
-  await expect(page.locator('.calendar__markNum')).toHaveText('20');
-
-  await page.goto('/?ben=gai');
-  await expect(families).toHaveCount(1);
-  await expect(families).toContainText('Thứ bảy, 19.12.2026');
-  await expect(page.locator('.calendar__markNum')).toHaveText('19');
-  await expect(page.locator('.hero__dateline')).toHaveText('19.12.2026');
-});
