@@ -2432,3 +2432,65 @@ a {
 [hidden] {
   display: none !important;
 }
+
+/* Thông tin riêng từng bên gia đình: ngày, các mốc giờ, địa điểm. */
+.details__family {
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-xs);
+  display: flex;
+}
+.details__date {
+  font-family: var(--font-display);
+  font-variant-numeric: tabular-nums lining-nums;
+  color: var(--c-red);
+  font-size: var(--fs-h4);
+  margin-top: var(--sp-sm);
+  line-height: 1.2;
+}
+.details__times {
+  justify-content: center;
+  gap: var(--sp-2xs) var(--sp-lg);
+  flex-wrap: wrap;
+  margin: var(--sp-2xs) 0 var(--sp-sm);
+  padding: 0;
+  list-style: none;
+  display: flex;
+}
+.details__times li {
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  display: flex;
+}
+.details__clock {
+  font-family: var(--font-display);
+  font-variant-numeric: tabular-nums lining-nums;
+  font-variation-settings:
+    "SOFT" 20,
+    "WONK" 0,
+    "opsz" 144;
+  color: var(--c-ink);
+  font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.2rem);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.details__what {
+  font-family: var(--font-hand);
+  color: var(--c-red-soft);
+  font-size: 1.15em;
+  line-height: 1.2;
+}
+.details__place {
+  margin-top: var(--sp-2xs);
+}
+.details__address {
+  max-width: 30ch;
+  margin-bottom: var(--sp-sm);
+}
+@media (max-width: 40rem) {
+  .details__family + .details__family {
+    border-top: 1px dashed var(--rule);
+    padding-top: var(--gap-stack);
+  }
+}

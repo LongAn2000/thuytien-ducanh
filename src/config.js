@@ -9,15 +9,9 @@ export const couple = {
   hashtag: '#DucAnhCuoiThuyTien',
 };
 
-// Giờ đón khách, có múi giờ +07:00. Lịch "đếm ngược" tự tính từ ngày này.
-export const weddingDate = '2026-12-20T17:30:00+07:00';
-
-export const dateLabel = {
-  weekday: 'Chủ Nhật',
-  day: '20',
-  month: '12',
-  year: '2026',
-};
+// Ngày cưới chính (YYYY-MM-DD): ngày trên trang bìa và ngày được khoanh trong lịch.
+// Khi mở thiệp bằng link ?ben=trai hoặc ?ben=gai, trang bìa và lịch dùng ngày của bên đó (xem families).
+export const weddingDate = '2026-12-20';
 
 export const meta = {
   title: 'Đức Anh & Thủy Tiên — 20.12.2026',
@@ -60,28 +54,51 @@ export const calendar = {
   notes: { countdown: 'đếm ngược nè!', twoDays: 'còn 2 ngày', oneNight: 'còn 1 đêm nữa thôi', wedding: 'here come the bride' },
 };
 
+// Mỗi bên gia đình: bố mẹ, ngày tổ chức, các mốc giờ và địa điểm riêng.
+// Gửi khách link có ?ben=<id> (vd. https://.../thuytien-ducanh/?ben=gai) để chỉ hiện thông tin bên đó.
+// lunar: dòng ngày âm lịch, để trống thì không hiện.
 export const families = [
   {
-    side: 'Nhà trai',
-    people: [
-      { role: 'Bố iu', name: 'Nguyễn Văn A' },
-      { role: 'Mẹ iu', name: 'Lê Thị B' },
-    ],
-  },
-  {
+    id: 'gai',
     side: 'Nhà gái',
     people: [
       { role: 'Bố iu', name: 'Trần Văn C' },
       { role: 'Mẹ iu', name: 'Phạm Thị D' },
     ],
+    date: '2026-12-19',
+    lunar: '',
+    events: [
+      { time: '09:00', title: 'Lễ vu quy' },
+      { time: '11:00', title: 'Tiệc cưới' },
+    ],
+    venue: {
+      name: 'Tư gia nhà gái',
+      address: 'Số nhà, đường, xã/phường, tỉnh/thành',
+      mapUrl: 'https://maps.google.com/?q=Ha+Noi',
+    },
+  },
+  {
+    id: 'trai',
+    side: 'Nhà trai',
+    people: [
+      { role: 'Bố iu', name: 'Nguyễn Văn A' },
+      { role: 'Mẹ iu', name: 'Lê Thị B' },
+    ],
+    date: '2026-12-20',
+    lunar: '',
+    events: [
+      { time: '09:00', title: 'Lễ thành hôn' },
+      { time: '11:00', title: 'Tiệc cưới' },
+    ],
+    venue: {
+      name: 'Trung tâm tiệc cưới',
+      address: 'Sảnh A — Số nhà, đường, quận, Hà Nội',
+      mapUrl: 'https://maps.google.com/?q=Ha+Noi',
+    },
   },
 ];
 
 export const venue = {
-  name: 'Trung tâm tiệc cưới',
-  hall: 'Sảnh A',
-  address: 'Số nhà, đường, quận, Hà Nội',
-  mapUrl: 'https://maps.google.com/?q=Ha+Noi',
   note: 'Tới sớm một chút để còn kịp chụp hình với tụi mình nha.',
   illustration: 'art/venue.webp',
 };

@@ -41,10 +41,19 @@ function observeReveals(root = document) {
 
 const invitationType = () => state.guest?.type ?? 'general';
 
+// ?ben=<family id> shows only that family's details and uses its date on the cover and calendar.
+const sideFamily = C.families.find(f => f.id === new URLSearchParams(window.location.search).get('ben'));
+const activeDate = () => (sideFamily?.date ?? C.weddingDate).slice(0, 10);
+const dateLabel = () => {
+  const [year, month, day] = activeDate().split('-');
+  return { day, month, year };
+};
+
 /* ---------- Hero ---------- */
 
 function heroHtml() {
-  const { couple, dateLabel: d, hero, music } = C;
+  const { couple, hero, music } = C;
+  const d = dateLabel();
   const dear = state.guest
     ? `<p class="hero__dear">Dear ${esc(state.guest.name)},<span class="hero__invite">${esc(hero.invite)}</span></p>`
     : '';
@@ -294,8 +303,8 @@ const DOW = ['Chủ nhật', 'Thứ hai', 'Thứ ba', 'Thứ tư', 'Thứ năm',
 const MONTHS = ['Tháng Một', 'Tháng Hai', 'Tháng Ba', 'Tháng Tư', 'Tháng Năm', 'Tháng Sáu', 'Tháng Bảy', 'Tháng Tám', 'Tháng Chín', 'Tháng Mười', 'Tháng Mười Một', 'Tháng Mười Hai'];
 
 function calendarHtml() {
-  const date = new Date(C.weddingDate);
-  const base = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate());
+  const [y, m, dd] = activeDate().split('-').map(Number);
+  const base = Date.UTC(y, m - 1, dd);
   const day = offset => {
     const d = new Date(base + 864e5 * offset);
     return { day: String(d.getUTCDate()).padStart(2, '0'), dow: DOW[d.getUTCDay()] };
@@ -303,7 +312,8 @@ function calendarHtml() {
   const quiet = [day(-9), day(-8), day(-7)];
   const countdown = [day(-2), day(-1)];
   const wedding = day(0);
-  const { calendar: cal, couple, dateLabel: d } = C;
+  const { calendar: cal, couple } = C;
+  const d = dateLabel();
   const alt = `${esc(couple.groom)} và ${esc(couple.bride)} trong bộ ảnh cưới`;
   return `<figure class="calendar__pad">
     <div class="calendar__rings" aria-hidden="true">${'<i></i>'.repeat(11)}</div>
@@ -358,18 +368,28 @@ function calendarHtml() {
   </figure>`;
 }
 
+function familyHtml(f) {
+  const [y, m, d] = f.date.split('-');
+  const dow = DOW[new Date(Date.UTC(+y, m - 1, +d)).getUTCDay()];
+  return `<div class="details__family">
+    <p class="eyebrow">${esc(f.side)}</p>
+    <ul class="details__parents">${f.people
+      .map(p => `<li><span class="details__role">${esc(p.role)}</span><span class="details__parentName">${esc(p.name)}</span></li>`)
+      .join('')}</ul>
+    <p class="details__date">${dow}, ${d}.${m}.${y}</p>
+    ${f.lunar ? `<p class="caption">${esc(f.lunar)}</p>` : ''}
+    <ol class="details__times">${f.events
+      .map(e => `<li><span class="details__clock">${esc(e.time)}</span><span class="details__what">${esc(e.title)}</span></li>`)
+      .join('')}</ol>
+    <p class="h4 details__place">${esc(f.venue.name)}</p>
+    <p class="muted details__address">${esc(f.venue.address)}</p>
+    <a class="btn btn--stamp" href="${esc(f.venue.mapUrl)}" target="_blank" rel="noreferrer noopener">${star}Xem bản đồ${star}</a>
+  </div>`;
+}
+
 function detailsHtml() {
   const v = C.venue;
-  const families = C.families
-    .map(
-      f => `<div class="details__family">
-        <p class="eyebrow">${esc(f.side)}</p>
-        <ul class="details__parents">${f.people
-          .map(p => `<li><span class="details__role">${esc(p.role)}</span><span class="details__parentName">${esc(p.name)}</span></li>`)
-          .join('')}</ul>
-      </div>`,
-    )
-    .join('');
+  const families = (sideFamily ? [sideFamily] : C.families).map(familyHtml).join('');
   return `
   <section id="thong-tin" class="section section--stripe details__locked" aria-labelledby="thong-tin-title">
     ${decor({ src: 'red/dove', x: '82%', y: '7%', w: 'clamp(66px, 16vw, 134px)', r: '-8deg', motion: 'float', duration: '8s' })}
@@ -385,12 +405,7 @@ function detailsHtml() {
         <hr class="details__divider">
         ${reveal(
           `<img class="details__illustration sway" src="${url(v.illustration)}" alt="" aria-hidden="true">
-          <p class="eyebrow">Địa điểm</p>
-          <h3 class="h3">${esc(v.name)}</h3>
-          <p class="h4">${esc(v.hall)}</p>
-          <p class="muted">${esc(v.address)}</p>
-          <p class="script">${esc(v.note)}</p>
-          <a class="btn btn--stamp" href="${esc(v.mapUrl)}" target="_blank" rel="noreferrer noopener">${star}Xem bản đồ${star}</a>`,
+          <p class="script">${esc(v.note)}</p>`,
           { cls: 'details__venue', delay: 180 },
         )}
       </div>
