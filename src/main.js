@@ -62,7 +62,7 @@ function heroHtml() {
     ${decor({ src: 'beige/ribbon', x: '20%', y: '88%', w: 'clamp(70px, 9vw, 130px)', r: '6deg', motion: 'sway', duration: '11s', delay: '-5s', opacity: 0.8, hideOnMobile: true })}
     <div class="hero__top">
       <p class="eyebrow">Save the date</p>
-      <p class="hero__monogram">${esc(couple.groom.at(0))} &amp; ${esc(couple.bride.at(0))}<img class="hero__monogramBow wobble" src="${url('art/beige/bow.webp')}" alt="" aria-hidden="true"></p>
+      <p class="hero__monogram">${esc(couple.monogram[0])} &amp; ${esc(couple.monogram[1])}<img class="hero__monogramBow wobble" src="${url('art/beige/bow.webp')}" alt="" aria-hidden="true"></p>
     </div>
     <div class="hero__stage">
       <img class="hero__printer" src="${url('art/printer.webp')}" alt="" aria-hidden="true">

@@ -7,6 +7,8 @@ export const couple = {
   groomFull: 'Nguyễn Đức Anh',
   brideFull: 'Trần Thủy Tiên',
   hashtag: '#DucAnhCuoiThuyTien',
+  // Chữ viết tắt dưới "Save the date" ở trang bìa.
+  monogram: ['A', 'T'],
 };
 
 // Giờ đón khách, có múi giờ +07:00. Lịch "đếm ngược" tự tính từ ngày này.
