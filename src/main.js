@@ -369,7 +369,21 @@ function calendarHtml() {
 }
 
 function detailsHtml() {
-  const v = C.venue;
+  const venues = C.venues
+    .map(v =>
+      reveal(
+        `<img class="details__illustration sway" src="${url(v.illustration)}" alt="" aria-hidden="true">
+          <p class="eyebrow">${esc(v.title)}</p>
+          <h3 class="h3">${esc(v.name)}</h3>
+          <p class="h4">${esc(v.hall)}</p>
+          ${v.lunar ? `<p class="muted">${esc(v.lunar)}</p>` : ''}
+          <p class="muted">${esc(v.address)}</p>
+          ${v.note ? `<p class="script">${esc(v.note)}</p>` : ''}
+          <a class="btn btn--stamp" href="${esc(v.mapUrl)}" target="_blank" rel="noreferrer noopener">${star}Xem bản đồ${star}</a>`,
+        { cls: 'details__venue', delay: 180 },
+      ),
+    )
+    .join('\n        <hr class="details__divider">\n        ');
   const families = C.families
     .map(
       f => `<div class="details__family">
@@ -393,17 +407,7 @@ function detailsHtml() {
         <hr class="details__divider">
         ${reveal(families, { cls: 'details__families', delay: 150 })}
         <hr class="details__divider">
-        ${reveal(
-          `<img class="details__illustration sway" src="${url(v.illustration)}" alt="" aria-hidden="true">
-          <p class="eyebrow">Địa điểm</p>
-          <h3 class="h3">${esc(v.name)}</h3>
-          <p class="h4">${esc(v.hall)}</p>
-          ${v.lunar ? `<p class="muted">${esc(v.lunar)}</p>` : ''}
-          <p class="muted">${esc(v.address)}</p>
-          <p class="script">${esc(v.note)}</p>
-          <a class="btn btn--stamp" href="${esc(v.mapUrl)}" target="_blank" rel="noreferrer noopener">${star}Xem bản đồ${star}</a>`,
-          { cls: 'details__venue', delay: 180 },
-        )}
+        ${venues}
       </div>
     </div>
   </section>`;

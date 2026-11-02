@@ -83,15 +83,29 @@ export const families = [
   },
 ];
 
-export const venue = {
-  name: 'Trung tâm văn hóa xã Thanh Trì',
-  hall: 'Lễ thành hôn lúc 10:00',
-  lunar: 'Chủ Nhật 06.12.2026 (tức 28.10 năm Bính Ngọ)',
-  address: '20 Nguyễn Bặc, xã Thanh Trì, Hà Nội',
-  mapUrl: 'https://www.google.com/maps/search/?api=1&query=Trung+t%C3%A2m+v%C4%83n+h%C3%B3a+x%C3%A3+Thanh+Tr%C3%AC%2C+20+Nguy%E1%BB%85n+B%E1%BA%B7c%2C+Thanh+Tr%C3%AC%2C+H%C3%A0+N%E1%BB%99i',
-  note: 'Tới sớm một chút để còn kịp chụp hình với tụi mình nha.',
-  illustration: 'art/venue.webp',
-};
+// Các buổi tiệc, mỗi buổi một khối giống nhau (tiêu đề, địa điểm, giờ, địa chỉ, bản đồ).
+export const venues = [
+  {
+    title: 'Lễ thành hôn',
+    name: 'Trung tâm văn hóa xã Thanh Trì',
+    hall: 'Chủ Nhật 06.12.2026 · 10:00',
+    lunar: 'Tức ngày 28 tháng 10 năm Bính Ngọ',
+    address: '20 Nguyễn Bặc, xã Thanh Trì, Hà Nội',
+    mapUrl: 'https://www.google.com/maps/search/?api=1&query=Trung+t%C3%A2m+v%C4%83n+h%C3%B3a+x%C3%A3+Thanh+Tr%C3%AC%2C+20+Nguy%E1%BB%85n+B%E1%BA%B7c%2C+Thanh+Tr%C3%AC%2C+H%C3%A0+N%E1%BB%99i',
+    note: 'Tới sớm một chút để còn kịp chụp hình với tụi mình nha.',
+    illustration: 'art/venue.webp',
+  },
+  {
+    title: 'Tiệc cưới nhà gái',
+    name: 'Phương Nhi',
+    // Thiệp giấy nhà gái để trống giờ (mời hai khung giờ, ghi tay).
+    hall: 'Thứ Bảy 05.12.2026',
+    lunar: 'Tức ngày 27 tháng 10 năm Bính Ngọ',
+    address: 'Thôn Phương Mai, xã Tân Minh, tỉnh Ninh Bình',
+    mapUrl: 'https://www.google.com/maps/search/?api=1&query=Ph%C6%B0%C6%A1ng+Nhi%2C+Th%C3%B4n+Ph%C6%B0%C6%A1ng+Mai%2C+T%C3%A2n+Minh%2C+Ninh+B%C3%ACnh',
+    illustration: 'art/venue.webp',
+  },
+];
 
 export const agenda = {
   eyebrow: 'Agenda',
