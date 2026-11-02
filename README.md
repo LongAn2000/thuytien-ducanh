@@ -8,6 +8,8 @@ HTML + CSS + JavaScript thuần, Vite để chạy local và build.
 
 ## Chạy
 
+Cần Node ≥ 22.12 (máy này: `nvm use 22`).
+
 ```bash
 npm ci
 npm run dev        # http://127.0.0.1:5173
@@ -21,11 +23,11 @@ Trên Windows: nhấp đúp `start.cmd`.
 - `src/config.js`: tên, ngày giờ, gia đình, địa điểm, chương trình, chữ trong RSVP, nhạc nền, `sheetEndpoint` để nhận RSVP qua Google Apps Script.
 - `src/style.css`: giao diện (giữ nguyên thông số của mẫu).
 - `src/main.js`: dựng các phần và xử lý hiệu ứng, tương tác.
-- `public/photos/`: ảnh cưới. Ảnh hiện tại là **ảnh tạm**. Đổi ảnh: sửa bảng `PHOTOS` trong `scripts/prepare-photos.py`, rồi chạy
-  `python3 scripts/prepare-photos.py "/thư/mục/ảnh"`.
+- `public/photos/`: ảnh cưới. Đổi ảnh: sửa bảng `PHOTOS` (và `PUZZLE` cho trò ghép hình) trong `scripts/prepare-photos.py`, rồi chạy
+  `python3 scripts/prepare-photos.py "/thư/mục/ảnh"` (mặc định `~/Pictures/thuytien-ducanh`). Ảnh nào chưa có trong thư mục thì được bỏ qua.
 - `public/art/`: hình vẽ trang trí, nền sọc và font lấy từ thiệp mẫu.
 
-**Ngày giờ, địa điểm, tên bố mẹ hiện là dữ liệu minh họa.** Tranh vẽ chibi cô dâu chú rể và mèo của mẫu
+Đây là thiệp bên **nhà trai** (lễ thành hôn 10:00 ngày 06.12.2026, Trung tâm văn hóa xã Thanh Trì). Tranh vẽ chibi cô dâu chú rể và mèo của mẫu
 không được dùng; phần Dresscode và lời cảm ơn đang dùng ảnh thật thay thế.
 
 ## Deploy

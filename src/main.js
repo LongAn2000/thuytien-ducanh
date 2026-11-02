@@ -152,6 +152,14 @@ function initHero() {
 
 /* ---------- Gallery + Puzzle ---------- */
 
+// Tai ghép nằm giữa mép mảnh. Mảnh càng cao (ratio = cao/rộng) thì tai càng ngắn theo tỉ lệ để không bị kéo dài.
+function puzzleClips(ratio) {
+  const k = 1 / ratio;
+  const y = v => (0.5 + (v - 0.5) * k).toFixed(4);
+  return `<clipPath id="pz-tab" clipPathUnits="objectBoundingBox"><path d="M0,0 H0.82 V${y(0.35)} C0.9,${y(0.27)} 1,${y(0.37)} 1,0.5 C1,${y(0.63)} 0.9,${y(0.73)} 0.82,${y(0.65)} V1 H0 Z"/></clipPath>
+        <clipPath id="pz-notch" clipPathUnits="objectBoundingBox"><path d="M0,0 H1 V1 H0 V${y(0.65)} C0.08,${y(0.73)} 0.18,${y(0.63)} 0.18,0.5 C0.18,${y(0.37)} 0.08,${y(0.27)} 0,${y(0.35)} Z"/></clipPath>`;
+}
+
 function galleryHtml() {
   const g = C.gallery;
   const p = C.puzzle;
@@ -163,16 +171,15 @@ function galleryHtml() {
       </figure>`,
     )
     .join('');
-  const puzzle = `<div class="puzzle__wrap">
+  const puzzle = `<div class="puzzle__wrap" style="--pr:${p.ratio}">
       <p class="puzzle__title">${esc(p.title)}</p>
       <svg class="puzzle__defs" aria-hidden="true"><defs>
-        <clipPath id="pz-tab" clipPathUnits="objectBoundingBox"><path d="M0,0 H0.8200000000000001 V0.35 C0.9,0.27 1,0.37 1,0.5 C1,0.63 0.9,0.73 0.8200000000000001,0.65 V1 H0 Z"/></clipPath>
-        <clipPath id="pz-notch" clipPathUnits="objectBoundingBox"><path d="M0,0 H1 V1 H0 V0.65 C0.08,0.73 0.18,0.63 0.18,0.5 C0.18,0.37 0.08,0.27 0,0.35 Z"/></clipPath>
+        ${puzzleClips(p.ratio)}
       </defs></svg>
       <div class="puzzle__board">
-        <figure class="puzzle__slot" style="clip-path:url(#pz-tab)"><img src="${url(p.pieces[0].src)}" alt="${esc(p.pieces[0].alt)}" width="620" height="620" draggable="false"></figure>
-        <div class="puzzle__piece" style="clip-path:url(#pz-notch);--fx:0.52;--fy:0.2" role="button" tabindex="0" aria-disabled="false"
-          aria-label="${esc(p.pieces[1].alt)} — kéo hoặc dùng phím mũi tên để ghép vào mảnh bên trái"><img src="${url(p.pieces[1].src)}" alt="${esc(p.pieces[1].alt)}" width="620" height="620" draggable="false"></div>
+        <figure class="puzzle__slot" style="clip-path:url(#pz-tab)"><img src="${url(p.pieces[0].src)}" alt="${esc(p.pieces[0].alt)}" width="400" height="${Math.round(400 * p.ratio)}" draggable="false"></figure>
+        <div class="puzzle__piece" style="clip-path:url(#pz-notch);--fx:0.52;--fy:${(0.2 / p.ratio).toFixed(3)}" role="button" tabindex="0" aria-disabled="false"
+          aria-label="${esc(p.pieces[1].alt)} — kéo hoặc dùng phím mũi tên để ghép vào mảnh bên trái"><img src="${url(p.pieces[1].src)}" alt="${esc(p.pieces[1].alt)}" width="400" height="${Math.round(400 * p.ratio)}" draggable="false"></div>
       </div>
       <p class="puzzle__prompt" aria-live="polite">${esc(p.prompt)}</p>
     </div>`;
@@ -227,7 +234,7 @@ function initPuzzle() {
   const board = document.querySelector('.puzzle__board');
   const piece = board.querySelector('.puzzle__piece');
   const prompt = document.querySelector('.puzzle__prompt');
-  let pos = { x: 0.52, y: 0.2 };
+  let pos = { x: 0.52, y: 0.2 / C.puzzle.ratio };
   let dragging = false;
   let solved = false;
 
@@ -241,7 +248,7 @@ function initPuzzle() {
     paint();
   };
   const moveTo = (x, y) => {
-    if (Math.hypot(x, y) <= 0.17) {
+    if (Math.hypot(x, y * C.puzzle.ratio) <= 0.17) {
       pos = { x: 0, y: 0 };
       solved = true;
       dragging = false;
@@ -262,20 +269,21 @@ function initPuzzle() {
     const rect = piece.getBoundingClientRect();
     piece.setPointerCapture(e.pointerId);
     piece.dataset.ox = String(e.clientX - pos.x * rect.width);
-    piece.dataset.oy = String(e.clientY - pos.y * rect.width);
+    piece.dataset.oy = String(e.clientY - pos.y * rect.height);
+    piece.dataset.h = String(rect.height);
     piece.dataset.w = String(rect.width);
     setDragging(true);
   });
   piece.addEventListener('pointermove', e => {
     if (!dragging || !piece.hasPointerCapture(e.pointerId)) return;
     const w = Number(piece.dataset.w);
-    if (w) moveTo((e.clientX - Number(piece.dataset.ox)) / w, (e.clientY - Number(piece.dataset.oy)) / w);
+    if (w) moveTo((e.clientX - Number(piece.dataset.ox)) / w, (e.clientY - Number(piece.dataset.oy)) / Number(piece.dataset.h));
   });
   piece.addEventListener('pointerup', () => setDragging(false));
   piece.addEventListener('pointercancel', () => setDragging(false));
   piece.addEventListener('keydown', e => {
     if (solved) return;
-    const step = { ArrowLeft: [-0.07, 0], ArrowRight: [0.07, 0], ArrowUp: [0, -0.07], ArrowDown: [0, 0.07] }[e.key];
+    const step = { ArrowLeft: [-0.07, 0], ArrowRight: [0.07, 0], ArrowUp: [0, -0.07 / C.puzzle.ratio], ArrowDown: [0, 0.07 / C.puzzle.ratio] }[e.key];
     if (step) {
       e.preventDefault();
       moveTo(pos.x + step[0], pos.y + step[1]);
@@ -388,6 +396,7 @@ function detailsHtml() {
           <p class="eyebrow">Địa điểm</p>
           <h3 class="h3">${esc(v.name)}</h3>
           <p class="h4">${esc(v.hall)}</p>
+          ${v.lunar ? `<p class="muted">${esc(v.lunar)}</p>` : ''}
           <p class="muted">${esc(v.address)}</p>
           <p class="script">${esc(v.note)}</p>
           <a class="btn btn--stamp" href="${esc(v.mapUrl)}" target="_blank" rel="noreferrer noopener">${star}Xem bản đồ${star}</a>`,

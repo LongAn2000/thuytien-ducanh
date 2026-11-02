@@ -1737,7 +1737,9 @@ a {
   }
 }
 .puzzle__wrap {
-  --pw: clamp(112px, 34vw, 240px);
+  --pr: 1;
+  /* --pr: cao/rộng của mỗi mảnh (puzzle.ratio). Mảnh dọc thì thu hẹp lại để không quá cao. */
+  --pw: calc(clamp(112px, 34vw, 240px) * min(1, 1.6 / var(--pr)));
   align-items: center;
   gap: var(--sp-md);
   flex-direction: column;
@@ -1756,14 +1758,14 @@ a {
 }
 .puzzle__board {
   width: calc(var(--pw) * (2 - 0.18 + 0.52));
-  height: calc(var(--pw) * 1.24);
+  height: calc(var(--pw) * (var(--pr) * 1.12 + 0.12));
   position: relative;
 }
 .puzzle__slot,
 .puzzle__piece {
   top: calc(var(--pw) * 0.02);
   width: var(--pw);
-  aspect-ratio: 1;
+  aspect-ratio: 1 / var(--pr);
   margin: 0;
   position: absolute;
 }

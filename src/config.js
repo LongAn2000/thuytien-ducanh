@@ -1,29 +1,29 @@
 // Toàn bộ nội dung thiệp. Đường dẫn ảnh tính từ thư mục public/.
-// Ngày giờ, địa điểm, tên bố mẹ hiện là dữ liệu minh họa — thay bằng thông tin thật.
+// Thiệp bên nhà trai: lễ thành hôn 10:00 Chủ Nhật 06.12.2026 (tức 28/10 năm Bính Ngọ) tại Trung tâm văn hóa xã Thanh Trì.
 
 export const couple = {
   groom: 'Đức Anh',
   bride: 'Thủy Tiên',
   groomFull: 'Nguyễn Đức Anh',
-  brideFull: 'Trần Thủy Tiên',
+  brideFull: 'Trần Thị Thủy Tiên',
   hashtag: '#DucAnhCuoiThuyTien',
   // Chữ viết tắt dưới "Save the date" ở trang bìa.
   monogram: ['A', 'T'],
 };
 
 // Giờ đón khách, có múi giờ +07:00. Lịch "đếm ngược" tự tính từ ngày này.
-export const weddingDate = '2026-12-20T17:30:00+07:00';
+export const weddingDate = '2026-12-06T09:30:00+07:00';
 
 export const dateLabel = {
   weekday: 'Chủ Nhật',
-  day: '20',
+  day: '06',
   month: '12',
   year: '2026',
 };
 
 export const meta = {
-  title: 'Đức Anh & Thủy Tiên — 20.12.2026',
-  description: 'Thiệp cưới của Nguyễn Đức Anh và Trần Thủy Tiên. Chủ Nhật, ngày 20.12.2026.',
+  title: 'Đức Anh & Thủy Tiên — 06.12.2026',
+  description: 'Thiệp cưới của Nguyễn Đức Anh và Trần Thị Thủy Tiên. 10:00 Chủ Nhật, ngày 06.12.2026 tại Trung tâm văn hóa xã Thanh Trì, Hà Nội.',
 };
 
 export const hero = {
@@ -37,7 +37,7 @@ export const music = { src: '', title: '' };
 export const gallery = {
   eyebrow: 'Album',
   title: 'Cuộn phim của tụi mình',
-  note: '36 kiểu, tụi mình chọn ra mấy tấm ưng nhất.',
+  note: '38 kiểu, tụi mình chọn ra mấy tấm ưng nhất.',
   hint: 'vuốt sang phải để xem tiếp',
   shots: Array.from({ length: 10 }, (_, i) => ({
     src: `photos/gallery-${String(i + 1).padStart(2, '0')}.webp`,
@@ -50,9 +50,11 @@ export const puzzle = {
   prompt: 'Kéo mảnh bên phải cho khớp vào mảnh bên trái',
   done: 'Khớp rồi! Thông tin lễ cưới mở ngay bên dưới nha.',
   locked: 'Ghép hai mảnh ảnh phía trên để mở phần này nha',
+  // Một tấm ảnh cắt đôi ở giữa hai người (scripts/prepare-photos.py). ratio = cao/rộng của mỗi mảnh.
+  ratio: 2.1,
   pieces: [
-    { src: 'photos/puzzle-left.webp', alt: 'Cô dâu' },
-    { src: 'photos/puzzle-right.webp', alt: 'Chú rể' },
+    { src: 'photos/puzzle-left.webp', alt: 'Chú rể' },
+    { src: 'photos/puzzle-right.webp', alt: 'Cô dâu' },
   ],
 };
 
@@ -66,24 +68,25 @@ export const families = [
   {
     side: 'Nhà trai',
     people: [
-      { role: 'Bố iu', name: 'Nguyễn Văn A' },
-      { role: 'Mẹ iu', name: 'Lê Thị B' },
+      { role: 'Bố iu', name: 'Nguyễn Quang Lộc' },
+      { role: 'Mẹ iu', name: 'Đỗ Phương Thảo' },
     ],
   },
   {
     side: 'Nhà gái',
     people: [
-      { role: 'Bố iu', name: 'Trần Văn C' },
-      { role: 'Mẹ iu', name: 'Phạm Thị D' },
+      { role: 'Bố iu', name: 'Trần Duy Thửa' },
+      { role: 'Mẹ iu', name: 'Nguyễn Thị Chức' },
     ],
   },
 ];
 
 export const venue = {
-  name: 'Trung tâm tiệc cưới',
-  hall: 'Sảnh A',
-  address: 'Số nhà, đường, quận, Hà Nội',
-  mapUrl: 'https://maps.google.com/?q=Ha+Noi',
+  name: 'Trung tâm văn hóa xã Thanh Trì',
+  hall: 'Lễ thành hôn lúc 10:00',
+  lunar: 'Chủ Nhật 06.12.2026 (tức 28.10 năm Bính Ngọ)',
+  address: '20 Nguyễn Bặc, xã Thanh Trì, Hà Nội',
+  mapUrl: 'https://www.google.com/maps/search/?api=1&query=Trung+t%C3%A2m+v%C4%83n+h%C3%B3a+x%C3%A3+Thanh+Tr%C3%AC%2C+20+Nguy%E1%BB%85n+B%E1%BA%B7c%2C+Thanh+Tr%C3%AC%2C+H%C3%A0+N%E1%BB%99i',
   note: 'Tới sớm một chút để còn kịp chụp hình với tụi mình nha.',
   illustration: 'art/venue.webp',
 };
@@ -92,31 +95,20 @@ export const agenda = {
   eyebrow: 'Agenda',
   hint: 'vuốt sang phải để xem tiếp',
   likeHint: 'chạm vào ảnh để thả tim',
-  // Tiệc "intimate" chỉ hiện với khách được đánh dấu intimate (cần sheetEndpoint + link ?to=slug).
+  // Thêm một buổi { id: 'intimate', ... } nếu muốn có tiệc riêng chỉ hiện với khách được đánh dấu intimate
+  // (cần sheetEndpoint + link ?to=slug).
   parties: [
     {
-      id: 'intimate',
-      tab: 'Tiệc intimate',
-      title: 'Buổi chiều của những người thân nhất',
-      start: '15:00',
-      end: '17:30',
-      items: [
-        { time: '15:00', title: 'Welcoming', note: 'Photobooth, tiệc sún răng', photo: 'photos/agenda-01.webp', alt: '' },
-        { time: '16:00', title: 'Vows ceremony', photo: 'photos/agenda-02.webp', alt: '' },
-        { time: '16:45', title: 'Gap time', note: 'Nghỉ ngơi, chờ tiệc chính', photo: 'photos/agenda-03.webp', alt: '' },
-      ],
-    },
-    {
       id: 'main',
-      tab: 'Tiệc chính',
-      title: 'Buổi tối hôm đó sẽ diễn ra như vầy',
-      start: '17:30',
-      end: '21:00',
+      tab: 'Lễ thành hôn',
+      title: 'Buổi trưa hôm đó sẽ diễn ra như vầy',
+      start: '09:30',
+      end: '13:00',
       items: [
-        { time: '17:30', title: 'Đón khách', photo: 'photos/agenda-04.webp', alt: '' },
-        { time: '18:00', title: 'Làm lễ', photo: 'photos/agenda-05.webp', alt: '' },
-        { time: '18:30', title: 'Khai tiệc', photo: 'photos/agenda-06.webp', alt: '' },
-        { time: '19:30', title: 'Games & quẩy', photo: 'photos/agenda-07.webp', alt: '' },
+        { time: '09:30', title: 'Đón khách', photo: 'photos/agenda-04.webp', alt: '' },
+        { time: '10:00', title: 'Làm lễ', photo: 'photos/agenda-05.webp', alt: '' },
+        { time: '10:30', title: 'Dùng tiệc', photo: 'photos/agenda-06.webp', alt: '' },
+        { time: '11:15', title: 'Game & quẩy', photo: 'photos/agenda-07.webp', alt: '' },
       ],
     },
   ],
