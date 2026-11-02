@@ -153,10 +153,12 @@ function initHero() {
 /* ---------- Gallery + Puzzle ---------- */
 
 // Tai ghép nằm giữa mép mảnh. Mảnh càng cao (ratio = cao/rộng) thì tai càng ngắn theo tỉ lệ để không bị kéo dài.
-function puzzleClips(ratio) {
+// Mảnh trái rộng gấp `left` lần mảnh phải, nên tai ghép tính lại theo bề ngang của nó.
+function puzzleClips(ratio, left = 1) {
   const k = 1 / ratio;
   const y = v => (0.5 + (v - 0.5) * k).toFixed(4);
-  return `<clipPath id="pz-tab" clipPathUnits="objectBoundingBox"><path d="M0,0 H0.82 V${y(0.35)} C0.9,${y(0.27)} 1,${y(0.37)} 1,0.5 C1,${y(0.63)} 0.9,${y(0.73)} 0.82,${y(0.65)} V1 H0 Z"/></clipPath>
+  const x = v => (1 - (1 - v) / left).toFixed(4);
+  return `<clipPath id="pz-tab" clipPathUnits="objectBoundingBox"><path d="M0,0 H${x(0.82)} V${y(0.35)} C${x(0.9)},${y(0.27)} 1,${y(0.37)} 1,0.5 C1,${y(0.63)} ${x(0.9)},${y(0.73)} ${x(0.82)},${y(0.65)} V1 H0 Z"/></clipPath>
         <clipPath id="pz-notch" clipPathUnits="objectBoundingBox"><path d="M0,0 H1 V1 H0 V${y(0.65)} C0.08,${y(0.73)} 0.18,${y(0.63)} 0.18,0.5 C0.18,${y(0.37)} 0.08,${y(0.27)} 0,${y(0.35)} Z"/></clipPath>`;
 }
 
@@ -171,13 +173,13 @@ function galleryHtml() {
       </figure>`,
     )
     .join('');
-  const puzzle = `<div class="puzzle__wrap" style="--pr:${p.ratio}">
+  const puzzle = `<div class="puzzle__wrap" style="--pr:${p.ratio};--pl:${p.left ?? 1}">
       <p class="puzzle__title">${esc(p.title)}</p>
       <svg class="puzzle__defs" aria-hidden="true"><defs>
-        ${puzzleClips(p.ratio)}
+        ${puzzleClips(p.ratio, p.left)}
       </defs></svg>
       <div class="puzzle__board">
-        <figure class="puzzle__slot" style="clip-path:url(#pz-tab)"><img src="${url(p.pieces[0].src)}" alt="${esc(p.pieces[0].alt)}" width="400" height="${Math.round(400 * p.ratio)}" draggable="false"></figure>
+        <figure class="puzzle__slot" style="clip-path:url(#pz-tab)"><img src="${url(p.pieces[0].src)}" alt="${esc(p.pieces[0].alt)}" width="${Math.round(400 * (p.left ?? 1))}" height="${Math.round(400 * p.ratio)}" draggable="false"></figure>
         <div class="puzzle__piece" style="clip-path:url(#pz-notch);--fx:0.52;--fy:${(0.2 / p.ratio).toFixed(3)}" role="button" tabindex="0" aria-disabled="false"
           aria-label="${esc(p.pieces[1].alt)} — kéo hoặc dùng phím mũi tên để ghép vào mảnh bên trái"><img src="${url(p.pieces[1].src)}" alt="${esc(p.pieces[1].alt)}" width="400" height="${Math.round(400 * p.ratio)}" draggable="false"></div>
       </div>

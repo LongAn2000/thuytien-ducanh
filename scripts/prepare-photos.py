@@ -50,23 +50,24 @@ STICKERS = [
 
 
 # Trò ghép hình: một tấm ảnh chụp hai người, cắt đôi ở chỗ giữa hai người.
-# (nguồn, tâm ngang của đường cắt 0..1, mép trên 0..1, mép dưới 0..1)
-# Mảnh trái cố định, mảnh phải kéo vào. Hai mảnh chồng lên nhau ở phần tai ghép (0.18 bề ngang mảnh),
-# nên vùng cắt rộng 1.82 lần một mảnh. PUZZLE_RATIO phải khớp với puzzle.ratio trong src/config.js.
-PUZZLE = ('anh-1.JPG', 0.52, 0.20, 0.94)
-PUZZLE_RATIO = 2.1  # cao / rộng của mỗi mảnh
-PUZZLE_W = 400
+# (nguồn, vị trí đường cắt 0..1, mép trái, mép phải, mép trên, mép dưới — đều tính theo tỉ lệ ảnh)
+# Mảnh trái cố định, mảnh phải kéo vào. Tai ghép của mảnh trái lấn sang phải 0.18 bề ngang mảnh phải.
+# Hai mảnh có thể rộng khác nhau để đường cắt nằm đúng chỗ mình muốn mà không phải cắt bớt người bên trái.
+# Chạy xong, chép hai số ratio và left in ra vào puzzle trong src/config.js.
+PUZZLE = ('anh-1.JPG', 0.515, 0.0, 0.995, 0.21, 0.94)
+PUZZLE_W = 400  # bề ngang mảnh phải (px)
 
 
-def puzzle_pieces(img, cx, top, bottom):
-    h = (bottom - top) * img.height
-    w = h / PUZZLE_RATIO
-    total = 1.82 * w
-    left = min(max(cx * img.width - total / 2, 0), img.width - total)
+def puzzle_pieces(img, cut, left, right, top, bottom):
+    x_cut, x0, x1 = cut * img.width, left * img.width, right * img.width
     y0, y1 = top * img.height, bottom * img.height
-    size = (PUZZLE_W, round(PUZZLE_W * PUZZLE_RATIO))
-    a = img.crop((round(left), round(y0), round(left + w), round(y1))).resize(size, Image.LANCZOS)
-    b = img.crop((round(left + total - w), round(y0), round(left + total), round(y1))).resize(size, Image.LANCZOS)
+    w = x1 - x_cut  # mảnh phải
+    wl = x_cut + 0.18 * w - x0  # mảnh trái, gồm cả tai ghép
+    ratio, lw = (y1 - y0) / w, wl / w
+    h = round(PUZZLE_W * ratio)
+    a = img.crop((round(x0), round(y0), round(x0 + wl), round(y1))).resize((round(PUZZLE_W * lw), h), Image.LANCZOS)
+    b = img.crop((round(x_cut), round(y0), round(x1), round(y1))).resize((PUZZLE_W, h), Image.LANCZOS)
+    print(f'puzzle: ratio: {ratio:.3f}, left: {lw:.3f}')
     return a, b
 
 
@@ -105,9 +106,9 @@ def main():
         img = ImageOps.exif_transpose(img).convert('RGB')
         cover(img, w, h, fx, fy, *zoom).save(dst / out, 'WEBP', quality=82, method=6)
         print('ok', out)
-    name, cx, top, bottom = PUZZLE
+    name, *box = PUZZLE
     img = ImageOps.exif_transpose(Image.open(src / name)).convert('RGB')
-    for piece, out in zip(puzzle_pieces(img, cx, top, bottom), ('puzzle-left.webp', 'puzzle-right.webp')):
+    for piece, out in zip(puzzle_pieces(img, *box), ('puzzle-left.webp', 'puzzle-right.webp')):
         piece.save(dst / out, 'WEBP', quality=82, method=6)
         print('ok', out)
     for name, out, fx, fy, *frac in STICKERS:
