@@ -13,7 +13,7 @@ from PIL import Image, ImageDraw, ImageOps
 
 PHOTOS = [
     # Trang bìa: tấm ảnh in ra từ máy in
-    ('DSC09555.jpg', 'hero.webp', 708, 1008, 0.50, 0.40),
+    ('DSC09555.JPG', 'hero.webp', 708, 1008, 0.50, 0.60),
     # Album cuộn phim (khung ngang)
     ('PVT03879.jpg', 'gallery-01.webp', 760, 541, 0.50, 0.50),
     ('PVT03944.jpg', 'gallery-02.webp', 760, 541, 0.55, 0.50),
