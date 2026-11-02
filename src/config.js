@@ -97,11 +97,10 @@ export const venues = [
   },
   {
     title: 'Tiệc cưới nhà gái',
-    name: 'Phương Nhi',
-    // Thiệp giấy nhà gái để trống giờ (mời hai khung giờ, ghi tay).
-    hall: 'Thứ Bảy 05.12.2026',
+    name: 'Tư gia nhà gái',
+    hall: 'Thứ Bảy 05.12.2026 · 10:00',
     lunar: 'Tức ngày 27 tháng 10 năm Bính Ngọ',
-    address: 'Thôn Phương Mai, xã Tân Minh, tỉnh Ninh Bình',
+    address: 'Phương Nhi, Thôn Phương Mai, xã Tân Minh, tỉnh Ninh Bình',
     mapUrl: 'https://www.google.com/maps/search/?api=1&query=Ph%C6%B0%C6%A1ng+Nhi%2C+Th%C3%B4n+Ph%C6%B0%C6%A1ng+Mai%2C+T%C3%A2n+Minh%2C+Ninh+B%C3%ACnh',
     illustration: 'art/venue.webp',
   },
