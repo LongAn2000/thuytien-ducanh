@@ -706,7 +706,8 @@ function thankYouHtml() {
       ${reveal('<p class="eyebrow">Thank you</p><h2 id="cam-on-title" class="h2">Cảm ơn bạn</h2>', { cls: 'section-head thankyou__head', delay: 80 })}
       ${reveal(`<p class="lead">${esc(t.lead)}</p><p class="script">${esc(t.sign)}</p>`, { cls: 'thankyou__words', delay: 140 })}
       ${reveal(
-        `<div class="thankyou__crewRow">${t.humans.map((src, i) => member(src, 'human', human[i % human.length])).join('')}</div>
+        `${t.chibi ? `<img class="thankyou__chibi wobble" style="--dur:5.2s;--delay:-1.2s" src="${url(t.chibi)}" alt="${esc(C.couple.groom)} và ${esc(C.couple.bride)}" width="720" height="536">` : ''}
+        ${t.humans?.length ? `<div class="thankyou__crewRow">${t.humans.map((src, i) => member(src, 'human', human[i % human.length])).join('')}</div>` : ''}
         ${pets}
         ${t.petsCaption ? `<p class="caption thankyou__cats">${esc(t.petsCaption)}</p>` : ''}`,
         { cls: 'thankyou__crew', delay: 200 },

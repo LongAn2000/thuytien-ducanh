@@ -101,7 +101,7 @@ export const venues = [
     hall: 'Thứ Bảy 05.12.2026 · 10:00',
     lunar: 'Tức ngày 27 tháng 10 năm Bính Ngọ',
     address: 'Phương Nhi, Thôn Phương Mai, xã Tân Minh, tỉnh Ninh Bình',
-    mapUrl: 'https://www.google.com/maps/search/?api=1&query=Ph%C6%B0%C6%A1ng+Nhi%2C+Th%C3%B4n+Ph%C6%B0%C6%A1ng+Mai%2C+T%C3%A2n+Minh%2C+Ninh+B%C3%ACnh',
+    mapUrl: 'https://maps.app.goo.gl/L2c2JPkQ2pCituM56',
     illustration: 'art/venue.webp',
   },
 ];
@@ -116,7 +116,7 @@ export const agenda = {
     {
       id: 'main',
       tab: 'Lễ thành hôn',
-      title: 'Buổi trưa hôm đó sẽ diễn ra như vầy',
+      title: 'Lễ thành hôn sẽ diễn ra như vầy',
       start: '09:30',
       end: '13:00',
       items: [
@@ -163,9 +163,11 @@ export const rsvp = {
 export const thankYou = {
   lead: 'Hẹn gặp bạn ở đám cưới, nhớ đói bụng sẵn nha!',
   sign: 'Thương nhiều, Đức Anh & Thủy Tiên',
-  humans: ['photos/crew-her.webp', 'photos/crew-him.webp'],
-  pets: ['photos/crew-pet-1.webp', 'photos/crew-pet-2.webp', 'photos/crew-pet-3.webp'],
-  petsCaption: 'và hội bạn thân',
+  // Tranh chibi cô dâu chú rể (một tấm chung). Có thể thay bằng humans: [ảnh 1, ảnh 2] để hiện hai ảnh tròn.
+  chibi: 'art/draw/chibi.webp',
+  humans: [],
+  pets: ['art/draw/cat-1.webp', 'art/draw/cat-2.webp', 'art/draw/cat-3.webp'],
+  petsCaption: 'và ba bé mèo',
 };
 
 // URL Google Apps Script nhận RSVP (POST JSON) và tra khách theo ?to=slug (GET).

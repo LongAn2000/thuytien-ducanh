@@ -2411,6 +2411,11 @@ a {
 .thankyou__human {
   --size: clamp(104px, 26vw, 168px);
 }
+.thankyou__chibi {
+  width: clamp(220px, 64vw, 360px);
+  height: auto;
+  transform-origin: 50% 85%;
+}
 .thankyou__cat {
   --size: clamp(58px, 15vw, 96px);
 }

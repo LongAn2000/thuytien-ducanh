@@ -27,8 +27,8 @@ Trên Windows: nhấp đúp `start.cmd`.
   `python3 scripts/prepare-photos.py "/thư/mục/ảnh"` (mặc định `~/Pictures/thuytien-ducanh`). Ảnh nào chưa có trong thư mục thì được bỏ qua.
 - `public/art/`: hình vẽ trang trí, nền sọc và font lấy từ thiệp mẫu.
 
-Đây là thiệp bên **nhà trai** (lễ thành hôn 10:00 ngày 06.12.2026, Trung tâm văn hóa xã Thanh Trì). Tranh vẽ chibi cô dâu chú rể và mèo của mẫu
-không được dùng; phần Dresscode và lời cảm ơn đang dùng ảnh thật thay thế.
+Đây là thiệp bên **nhà trai** (lễ thành hôn 10:00 ngày 06.12.2026, Trung tâm văn hóa xã Thanh Trì). Lời cảm ơn dùng tranh chibi riêng của hai bạn
+(`public/art/draw/chibi.webp`) và ba bé mèo vẽ của mẫu; phần Dresscode dùng ảnh thật.
 
 ## Deploy
 

@@ -14,20 +14,20 @@ from PIL import Image, ImageDraw, ImageOps
 PHOTOS = [
     # Trang bìa: tấm ảnh in ra từ máy in
     ('DSC09555.JPG', 'hero.webp', 708, 1008, 0.50, 0.60),
-    # Album cuộn phim (khung ngang)
-    ('PVT03879.jpg', 'gallery-01.webp', 760, 541, 0.50, 0.50),
-    ('PVT03944.jpg', 'gallery-02.webp', 760, 541, 0.55, 0.50),
-    ('PVT04069.jpg', 'gallery-03.webp', 760, 541, 0.50, 0.35),
-    ('PVT04100.jpg', 'gallery-04.webp', 760, 541, 0.50, 0.35),
-    ('PVT04102.jpg', 'gallery-05.webp', 760, 541, 0.50, 0.50),
-    ('PVT04128.jpg', 'gallery-06.webp', 760, 541, 0.50, 0.35),
-    ('PVT04149.jpg', 'gallery-07.webp', 760, 541, 0.50, 0.35),
-    ('PVT04180.jpg', 'gallery-08.webp', 760, 541, 0.50, 0.66),
-    ('PVT04195.jpg', 'gallery-09.webp', 760, 541, 0.50, 0.50),
-    ('PVT04232.jpg', 'gallery-10.webp', 760, 541, 0.50, 0.38),
+    # Album cuộn phim (khung ngang): xen kẽ áo dài với đồ trắng
+    ('PVT03879.JPG', 'gallery-01.webp', 760, 541, 0.50, 0.50),
+    ('PVT04128.JPG', 'gallery-02.webp', 760, 541, 0.50, 0.30),
+    ('PVT03944.JPG', 'gallery-03.webp', 760, 541, 0.55, 0.50),
+    ('PVT04149.JPG', 'gallery-04.webp', 760, 541, 0.50, 0.50),
+    ('PVT04069.JPG', 'gallery-05.webp', 760, 541, 0.50, 0.45),
+    ('PVT04180.JPG', 'gallery-06.webp', 760, 541, 0.50, 0.55),
+    ('PVT04100.JPG', 'gallery-07.webp', 760, 541, 0.50, 0.35),
+    ('PVT04195.JPG', 'gallery-08.webp', 760, 541, 0.50, 0.50),
+    ('PVT04102.JPG', 'gallery-09.webp', 760, 541, 0.50, 0.50),
+    ('PVT04232.JPG', 'gallery-10.webp', 760, 541, 0.50, 0.30),
     # Lịch
-    ('DSC09501.jpg', 'cal-photo-1.webp', 560, 700, 0.50, 0.35),
-    ('DSC09571.jpg', 'cal-photo-2.webp', 440, 550, 0.50, 0.35),
+    ('DSC09501.JPG', 'cal-photo-1.webp', 560, 700, 0.50, 0.45),
+    ('DSC09571.JPG', 'cal-photo-2.webp', 440, 550, 0.50, 0.45),
     # Chương trình (Agenda): đón khách, làm lễ, dùng tiệc, game & quẩy
     ('don-khach.jpg', 'agenda-04.webp', 560, 747, 0.50, 0.55),
     ('lam-le.jpg', 'agenda-05.webp', 560, 747, 0.50, 0.50),
@@ -38,15 +38,9 @@ PHOTOS = [
     ('DSC09471.JPG', 'pose-b.webp', 760, 596, 0.50, 0.48),
 ]
 
-# Lời cảm ơn: ảnh tròn kiểu sticker (thay cho tranh vẽ cô dâu chú rể và thú cưng).
+# Lời cảm ơn: ảnh tròn kiểu sticker. Hiện phần cảm ơn dùng tranh chibi (public/art/draw/), nên để trống.
 # (nguồn, đích, tâm ngang, tâm dọc[, cỡ khung so với cạnh ngắn của ảnh, mặc định 0.55])
-STICKERS = [
-    ('DSC09438.jpg', 'crew-her.webp', 0.70, 0.31, 0.36),
-    ('DSC08460.jpg', 'crew-him.webp', 0.42, 0.45, 0.22),
-    ('PVT04232.jpg', 'crew-pet-1.webp', 0.33, 0.38, 0.36),
-    ('PVT04227.jpg', 'crew-pet-2.webp', 0.68, 0.36),
-    ('DSC09857.jpg', 'crew-pet-3.webp', 0.50, 0.26),
-]
+STICKERS = []
 
 
 # Trò ghép hình: một tấm ảnh chụp hai người, cắt đôi ở chỗ giữa hai người.
