@@ -1699,42 +1699,19 @@ a {
   font-size: 0.8em;
 }
 .dresscode__flipbook {
-  aspect-ratio: 760/596;
-  width: min(420px, 78%);
+  aspect-ratio: 600/800;
+  width: min(340px, 72%);
   margin-inline: auto;
   position: relative;
 }
+/* Mỗi khung hiện 1/n vòng lặp; @keyframes dresscode__pose sinh trong main.js theo số khung. */
 .dresscode__frame {
-  object-fit: contain;
+  object-fit: cover;
   width: 100%;
   height: 100%;
-  animation-duration: 1.2s;
-  animation-timing-function: step-end;
-  animation-iteration-count: infinite;
+  animation: dresscode__pose var(--dur, 2.4s) step-end infinite both;
   position: absolute;
   inset: 0;
-}
-.dresscode__frameA {
-  animation-name: dresscode__poseA;
-}
-.dresscode__frameB {
-  animation-name: dresscode__poseB;
-}
-@keyframes dresscode__poseA {
-  0% {
-    opacity: 1;
-  }
-  33.333% {
-    opacity: 0;
-  }
-}
-@keyframes dresscode__poseB {
-  0% {
-    opacity: 0;
-  }
-  33.333% {
-    opacity: 1;
-  }
 }
 .puzzle__wrap {
   --pr: 1;

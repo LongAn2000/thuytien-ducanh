@@ -553,6 +553,7 @@ function initAgenda() {
 
 function dresscodeHtml() {
   const d = C.dresscode;
+  const n = d.frames.length;
   return `
   <section id="dresscode" class="section section--stripe" aria-labelledby="dresscode-title">
     ${decor({ src: 'red/cherry', x: '-3%', y: '8%', w: 'clamp(70px, 17vw, 150px)', r: '-10deg', motion: 'sway', duration: '9s' })}
@@ -561,7 +562,14 @@ function dresscodeHtml() {
       <img class="seal" src="${url('art/seal.webp')}" alt="" aria-hidden="true">
       ${reveal(`<p class="eyebrow">Dresscode</p><h2 id="dresscode-title" class="h2">${esc(d.title)}</h2><p class="lead">${esc(d.note)}</p>`, { cls: 'section-head' })}
       ${reveal(
-        `<img class="dresscode__frame dresscode__frameA" src="${url(d.frames[0])}" alt="" aria-hidden="true"><img class="dresscode__frame dresscode__frameB" src="${url(d.frames[1])}" alt="Ảnh ${esc(C.couple.groom)} và ${esc(C.couple.bride)}">`,
+        `<style>@keyframes dresscode__pose{0%{opacity:1}${(100 / n).toFixed(3)}%{opacity:0}}</style>${d.frames
+          .map(
+            (src, i) =>
+              `<img class="dresscode__frame" style="--dur:${n * d.frameMs}ms;animation-delay:${-((n - i) % n) * d.frameMs}ms" src="${url(src)}" width="600" height="800" ${
+                i ? 'alt="" aria-hidden="true"' : `alt="Ảnh ${esc(C.couple.groom)} và ${esc(C.couple.bride)}"`
+              }>`,
+          )
+          .join('')}`,
         { cls: 'dresscode__flipbook', delay: 80 },
       )}
     </div>

@@ -132,7 +132,9 @@ export const agenda = {
 export const dresscode = {
   title: 'Đừng quan trọng màu sắc hay phong cách',
   note: 'Hãy cùng nhau lên ảnh thật đẹp 🩲👙',
-  frames: ['photos/pose-a.webp', 'photos/pose-b.webp'],
+  // Các khung lật lần lượt như ảnh gif, mỗi khung hiện frameMs mili giây.
+  frames: ['photos/pose-1.webp', 'photos/pose-2.webp', 'photos/pose-3.webp', 'photos/pose-4.webp'],
+  frameMs: 600,
 };
 
 export const rsvp = {

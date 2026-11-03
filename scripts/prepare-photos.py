@@ -15,16 +15,16 @@ PHOTOS = [
     # Trang bìa: tấm ảnh in ra từ máy in
     ('DSC09555.JPG', 'hero.webp', 708, 1008, 0.50, 0.60),
     # Album cuộn phim (khung ngang): xen kẽ áo dài với đồ trắng
-    ('PVT03879.JPG', 'gallery-01.webp', 760, 541, 0.50, 0.50),
-    ('PVT04128.JPG', 'gallery-02.webp', 760, 541, 0.50, 0.30),
-    ('PVT03944.JPG', 'gallery-03.webp', 760, 541, 0.55, 0.50),
-    ('PVT04149.JPG', 'gallery-04.webp', 760, 541, 0.50, 0.50),
-    ('PVT04069.JPG', 'gallery-05.webp', 760, 541, 0.50, 0.45),
-    ('PVT04180.JPG', 'gallery-06.webp', 760, 541, 0.50, 0.55),
-    ('PVT04100.JPG', 'gallery-07.webp', 760, 541, 0.50, 0.35),
-    ('PVT04195.JPG', 'gallery-08.webp', 760, 541, 0.50, 0.50),
-    ('PVT04102.JPG', 'gallery-09.webp', 760, 541, 0.50, 0.50),
-    ('PVT04232.JPG', 'gallery-10.webp', 760, 541, 0.50, 0.30),
+    ('PVT03879.JPG', 'gallery-01.webp', 760, 541, 0.47, 0.58, 1.6),
+    ('PVT04128.JPG', 'gallery-02.webp', 760, 541, 0.55, 0.52, 1.15),
+    ('PVT03944.JPG', 'gallery-03.webp', 760, 541, 0.74, 0.45, 1.35),
+    ('PVT04149.JPG', 'gallery-04.webp', 760, 541, 0.52, 0.58, 1.1),
+    ('PVT04069.JPG', 'gallery-05.webp', 760, 541, 0.55, 0.50, 1.1),
+    ('PVT04180.JPG', 'gallery-06.webp', 760, 541, 0.42, 0.60, 1.45),
+    ('PVT04100.JPG', 'gallery-07.webp', 760, 541, 0.52, 0.50, 1.1),
+    ('PVT04195.JPG', 'gallery-08.webp', 760, 541, 0.45, 0.45, 1.15),
+    ('PVT04102.JPG', 'gallery-09.webp', 760, 541, 0.57, 0.48, 1.4),
+    ('PVT04232.JPG', 'gallery-10.webp', 760, 541, 0.55, 0.50, 1.1),
     # Lịch
     ('DSC09501.JPG', 'cal-photo-1.webp', 560, 700, 0.50, 0.45),
     ('DSC09571.JPG', 'cal-photo-2.webp', 440, 550, 0.50, 0.45),
@@ -33,9 +33,11 @@ PHOTOS = [
     ('lam-le.jpg', 'agenda-05.webp', 560, 747, 0.50, 0.50),
     ('dung-tiec.JPG', 'agenda-06.webp', 560, 747, 0.52, 0.50),
     ('game-quay.JPG', 'agenda-07.webp', 560, 747, 0.50, 0.50),
-    # Dresscode: hai khung hình lật qua lại (cùng bối cảnh, hai dáng)
-    ('DSC09443.jpg', 'pose-a.webp', 760, 596, 0.50, 0.48),
-    ('DSC09471.JPG', 'pose-b.webp', 760, 596, 0.50, 0.48),
+    # Dresscode: các khung hình lật lần lượt như ảnh gif (cùng bối cảnh, mỗi tấm một dáng)
+    ('DSC09501.JPG', 'pose-1.webp', 600, 800, 0.50, 0.60),
+    ('DSC09509.JPG', 'pose-2.webp', 600, 800, 0.50, 0.60),
+    ('DSC09571.JPG', 'pose-3.webp', 600, 800, 0.50, 0.60),
+    ('DSC09574.JPG', 'pose-4.webp', 600, 800, 0.50, 0.60),
 ]
 
 # Lời cảm ơn: ảnh tròn kiểu sticker. Hiện phần cảm ơn dùng tranh chibi (public/art/draw/), nên để trống.
