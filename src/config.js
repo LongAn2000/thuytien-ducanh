@@ -57,7 +57,7 @@ export const puzzle = {
   ratio: 1.939,
   left: 0.942,
   // Vị trí tai ghép theo chiều cao mảnh (0 = trên cùng, 1 = dưới cùng): đặt ở khoảng nền trống giữa hai người.
-  tabY: 0.7,
+  tabY: 0.6,
   pieces: [
     { src: 'photos/puzzle-left.webp', alt: 'Chú rể' },
     { src: 'photos/puzzle-right.webp', alt: 'Cô dâu' },
