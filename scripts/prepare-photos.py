@@ -50,7 +50,7 @@ STICKERS = []
 # Mảnh trái cố định, mảnh phải kéo vào. Tai ghép rộng 0.18 bề ngang mảnh phải.
 # Hai mảnh có thể rộng khác nhau để đường cắt nằm đúng chỗ mình muốn mà không phải cắt bớt người bên trái.
 # Chạy xong, chép ba giá trị tab, ratio và left in ra vào puzzle trong src/config.js.
-PUZZLE = ('anh-1.JPG', 0.515, 0.0, 0.995, 0.21, 0.94)
+PUZZLE = ('anh-1.JPG', 0.532, 0.0, 0.995, 0.21, 0.94)
 PUZZLE_W = 400  # bề ngang mảnh phải (px)
 # Tai ghép nằm ở mảnh nào: 'left' = mảnh phải có tai lồi sang trái, 'right' = mảnh trái có tai lồi sang phải.
 # Đường cắt thẳng luôn ở vị trí `cut`, tai ghép lấn sang phía bên kia.

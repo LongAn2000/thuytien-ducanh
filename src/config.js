@@ -54,8 +54,8 @@ export const puzzle = {
   // tab = mảnh phải có tai lồi sang trái ('left') hay mảnh trái có tai lồi sang phải ('right'),
   // ratio = cao/rộng của mảnh phải, left = bề ngang mảnh trái so với mảnh phải.
   tab: 'left',
-  ratio: 1.871,
-  left: 0.88,
+  ratio: 1.939,
+  left: 0.942,
   pieces: [
     { src: 'photos/puzzle-left.webp', alt: 'Chú rể' },
     { src: 'photos/puzzle-right.webp', alt: 'Cô dâu' },
@@ -103,7 +103,7 @@ export const venues = [
     hall: 'Thứ Bảy 05.12.2026 · 10:00',
     lunar: 'Tức ngày 27 tháng 10 năm Bính Ngọ',
     address: 'Phương Nhi, Thôn Phương Mai, xã Tân Minh, tỉnh Ninh Bình',
-    mapUrl: 'https://maps.app.goo.gl/L2c2JPkQ2pCituM56',
+    mapUrl: 'https://maps.app.goo.gl/DWRtGCE1NV5wdysb8?g_st=ic',
     illustration: 'art/venue.webp',
   },
 ];
