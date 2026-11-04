@@ -380,6 +380,9 @@ function calendarHtml() {
   </figure>`;
 }
 
+// Khung giờ mời theo link, ví dụ ?ca=chieu (xem venues[].sessions trong config.js).
+const session = () => new URLSearchParams(window.location.search).get('ca')?.trim().toLowerCase() ?? '';
+
 function detailsHtml() {
   const venues = C.venues
     .map(v =>
@@ -387,7 +390,7 @@ function detailsHtml() {
         `<img class="details__illustration sway" src="${url(v.illustration)}" alt="" aria-hidden="true">
           <p class="eyebrow">${esc(v.title)}</p>
           <h3 class="h3">${esc(v.name)}</h3>
-          <p class="h4">${esc(v.hall)}</p>
+          <p class="h4">${esc(v.sessions?.[session()] ?? v.hall)}</p>
           ${v.lunar ? `<p class="muted">${esc(v.lunar)}</p>` : ''}
           <p class="muted">${esc(v.address)}</p>
           ${v.note ? `<p class="script">${esc(v.note)}</p>` : ''}

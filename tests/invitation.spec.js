@@ -44,3 +44,12 @@ test('in ảnh, ghép hình mở khóa thông tin, thả tim và RSVP', async ({
   }
   expect(errors).toEqual([]);
 });
+
+test('link ?ca=chieu đổi giờ tiệc nhà gái sang 15:00', async ({ page }) => {
+  const brideParty = page.locator('.details__venue').filter({ hasText: 'Tiệc cưới nhà gái' });
+  await page.goto('/');
+  await expect(brideParty).toContainText('05.12.2026 · 10:00');
+  await page.goto('/?ca=chieu');
+  await expect(brideParty).toContainText('05.12.2026 · 15:00');
+  await expect(page.locator('.details__venue').filter({ hasText: 'Lễ thành hôn' })).toContainText('10:00');
+});
