@@ -4,6 +4,12 @@ test('in ảnh, ghép hình mở khóa thông tin, thả tim và RSVP', async ({
   const errors = [];
   page.on('pageerror', error => errors.push(error.message));
   page.on('response', response => { if (response.status() >= 400) errors.push(`${response.status()} ${response.url()}`); });
+  // Không gửi RSVP thử vào Google Sheet thật.
+  const posted = [];
+  await page.route('https://script.google.com/**', route => {
+    if (route.request().method() === 'POST') posted.push(JSON.parse(route.request().postData()));
+    return route.fulfill({ status: 200, contentType: 'application/json', body: '{"ok":false}' });
+  });
   await page.goto('/');
 
   const hero = page.locator('#hero');
@@ -30,6 +36,7 @@ test('in ảnh, ghép hình mở khóa thông tin, thả tim và RSVP', async ({
   await page.fill('#rsvp-name', 'Khách thử');
   await page.getByRole('button', { name: /xác nhận/i }).click();
   await expect(page.getByText('Nhận được rồi nè!')).toBeVisible();
+  expect(posted).toEqual([expect.objectContaining({ name: 'Khách thử', attending: 'yes', companions: 2 })]);
 
   for (const width of [320, 375, 430, 768, 1280]) {
     await page.setViewportSize({ width, height: 900 });

@@ -176,4 +176,4 @@ export const thankYou = {
 
 // URL Google Apps Script nhận RSVP (POST JSON) và tra khách theo ?to=slug (GET).
 // Để trống: câu trả lời chỉ lưu trong localStorage của trình duyệt khách.
-export const sheetEndpoint = '';
+export const sheetEndpoint = 'https://script.google.com/macros/s/AKfycbx6SUqlHFubffElwDur-w3lObDL03Y0kwjcLX-C-nhkzRbxHdary7oUMiKA361z99NTWQ/exec';
