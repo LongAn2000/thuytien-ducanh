@@ -20,7 +20,7 @@ Trên Windows: nhấp đúp `start.cmd`.
 
 ## Chỉnh nội dung
 
-- `src/config.js`: tên, ngày giờ, gia đình, các buổi tiệc (`venues`), chương trình, chữ trong RSVP, nhạc nền, `sheetEndpoint` để nhận RSVP qua Google Apps Script.
+- `src/config.js`: tên, ngày giờ, gia đình, các buổi tiệc (`venues`), chương trình, chữ trong RSVP, nhạc nền, `sheetEndpoint` để nhận RSVP qua Google Apps Script (code và cách cài ở `scripts/rsvp-apps-script.gs`).
 - `src/style.css`: giao diện (giữ nguyên thông số của mẫu).
 - `src/main.js`: dựng các phần và xử lý hiệu ứng, tương tác.
 - `public/photos/`: ảnh cưới. Đổi ảnh: sửa bảng `PHOTOS` (và `PUZZLE` cho trò ghép hình) trong `scripts/prepare-photos.py`, rồi chạy
