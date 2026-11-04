@@ -86,7 +86,7 @@ export const families = [
 ];
 
 // Các buổi tiệc, mỗi buổi một khối giống nhau (tiêu đề, địa điểm, giờ, địa chỉ, bản đồ).
-// sessions: { <ca>: '<dòng giờ khác>' } — link thiệp thêm ?ca=<ca> thì hiện dòng giờ đó thay cho hall.
+// sessions: { <time>: '<dòng giờ khác>' } — link thiệp thêm ?time=<time> thì hiện dòng giờ đó thay cho hall.
 export const venues = [
   {
     title: 'Lễ thành hôn',
@@ -102,8 +102,8 @@ export const venues = [
     title: 'Tiệc cưới nhà gái',
     name: 'Tư gia nhà gái',
     hall: 'Thứ Bảy 05.12.2026 · 10:00',
-    // Khung giờ khác theo link: ...?ca=chieu hiện 15:00 (link không có ?ca vẫn là 10:00).
-    sessions: { chieu: 'Thứ Bảy 05.12.2026 · 15:00' },
+    // Khung giờ khác theo link: ...?time=15 hiện 15:00 (link không có ?time vẫn là 10:00).
+    sessions: { 15: 'Thứ Bảy 05.12.2026 · 15:00' },
     lunar: 'Tức ngày 27 tháng 10 năm Bính Ngọ',
     address: 'Phương Nhi, Thôn Phương Mai, xã Tân Minh, tỉnh Ninh Bình',
     mapUrl: 'https://maps.app.goo.gl/DWRtGCE1NV5wdysb8?g_st=ic',

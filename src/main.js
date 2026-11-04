@@ -380,8 +380,8 @@ function calendarHtml() {
   </figure>`;
 }
 
-// Khung giờ mời theo link, ví dụ ?ca=chieu (xem venues[].sessions trong config.js).
-const session = () => new URLSearchParams(window.location.search).get('ca')?.trim().toLowerCase() ?? '';
+// Khung giờ mời theo link, ví dụ ?time=15 (xem venues[].sessions trong config.js).
+const session = () => new URLSearchParams(window.location.search).get('time')?.trim().toLowerCase() ?? '';
 
 function detailsHtml() {
   const venues = C.venues
