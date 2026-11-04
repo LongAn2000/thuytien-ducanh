@@ -28,7 +28,7 @@ Trên Windows: nhấp đúp `start.cmd`.
 - `public/art/`: hình vẽ trang trí, nền sọc và font lấy từ thiệp mẫu.
 
 Đây là thiệp bên **nhà trai** (lễ thành hôn 10:00 ngày 06.12.2026, Trung tâm văn hóa xã Thanh Trì). Lời cảm ơn dùng tranh chibi riêng của hai bạn
-(`public/art/draw/chibi.webp`) và ba bé mèo vẽ của mẫu; phần Dresscode dùng ảnh thật.
+(`public/art/draw/chibi.webp`); phần Dresscode dùng ảnh thật.
 
 ## Deploy
 

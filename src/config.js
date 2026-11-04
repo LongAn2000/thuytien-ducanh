@@ -170,8 +170,8 @@ export const thankYou = {
   // Tranh chibi cô dâu chú rể (một tấm chung). Có thể thay bằng humans: [ảnh 1, ảnh 2] để hiện hai ảnh tròn.
   chibi: 'art/draw/chibi.webp',
   humans: [],
-  pets: ['art/draw/cat-1.webp', 'art/draw/cat-2.webp', 'art/draw/cat-3.webp'],
-  petsCaption: 'và ba bé mèo',
+  pets: [],
+  petsCaption: '',
 };
 
 // URL Google Apps Script nhận RSVP (POST JSON) và tra khách theo ?to=slug (GET).
