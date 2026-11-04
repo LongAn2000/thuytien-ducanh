@@ -156,19 +156,19 @@ function initHero() {
 // Mảnh trái rộng gấp `left` lần mảnh phải, nên tai ghép tính lại theo bề ngang của nó.
 // Mảnh trái rộng gấp `left` lần mảnh phải; hai mảnh chồng nhau 0.18 bề ngang mảnh phải.
 // tab = 'right': mảnh trái có tai lồi sang phải. tab = 'left': mảnh phải có tai lồi sang trái.
-function puzzleClips(ratio, left = 1, tab = 'right', tabY = 0.5) {
+function puzzleClips(ratio, left = 1, tab = 'right') {
   const k = 1 / ratio;
-  const y = v => (tabY + (v - 0.5) * k).toFixed(4); // tai ghép đặt ở tabY (tỉ lệ chiều cao mảnh)
+  const y = v => (0.5 + (v - 0.5) * k).toFixed(4);
   const x = v => (1 - (1 - v) / left).toFixed(4); // toạ độ trong dải chồng nhau → toạ độ mảnh trái
   const [slot, piece] =
     tab === 'left'
       ? [
-          `M0,0 H1 V${y(0.35)} C${x(0.92)},${y(0.27)} ${x(0.82)},${y(0.37)} ${x(0.82)},${y(0.5)} C${x(0.82)},${y(0.63)} ${x(0.92)},${y(0.73)} 1,${y(0.65)} V1 H0 Z`,
-          `M0.18,0 H1 V1 H0.18 V${y(0.65)} C0.1,${y(0.73)} 0,${y(0.63)} 0,${y(0.5)} C0,${y(0.37)} 0.1,${y(0.27)} 0.18,${y(0.35)} Z`,
+          `M0,0 H1 V${y(0.35)} C${x(0.92)},${y(0.27)} ${x(0.82)},${y(0.37)} ${x(0.82)},0.5 C${x(0.82)},${y(0.63)} ${x(0.92)},${y(0.73)} 1,${y(0.65)} V1 H0 Z`,
+          `M0.18,0 H1 V1 H0.18 V${y(0.65)} C0.1,${y(0.73)} 0,${y(0.63)} 0,0.5 C0,${y(0.37)} 0.1,${y(0.27)} 0.18,${y(0.35)} Z`,
         ]
       : [
-          `M0,0 H${x(0.82)} V${y(0.35)} C${x(0.9)},${y(0.27)} 1,${y(0.37)} 1,${y(0.5)} C1,${y(0.63)} ${x(0.9)},${y(0.73)} ${x(0.82)},${y(0.65)} V1 H0 Z`,
-          `M0,0 H1 V1 H0 V${y(0.65)} C0.08,${y(0.73)} 0.18,${y(0.63)} 0.18,${y(0.5)} C0.18,${y(0.37)} 0.08,${y(0.27)} 0,${y(0.35)} Z`,
+          `M0,0 H${x(0.82)} V${y(0.35)} C${x(0.9)},${y(0.27)} 1,${y(0.37)} 1,0.5 C1,${y(0.63)} ${x(0.9)},${y(0.73)} ${x(0.82)},${y(0.65)} V1 H0 Z`,
+          `M0,0 H1 V1 H0 V${y(0.65)} C0.08,${y(0.73)} 0.18,${y(0.63)} 0.18,0.5 C0.18,${y(0.37)} 0.08,${y(0.27)} 0,${y(0.35)} Z`,
         ];
   return `<clipPath id="pz-slot" clipPathUnits="objectBoundingBox"><path d="${slot}"/></clipPath>
         <clipPath id="pz-piece" clipPathUnits="objectBoundingBox"><path d="${piece}"/></clipPath>`;
@@ -188,7 +188,7 @@ function galleryHtml() {
   const puzzle = `<div class="puzzle__wrap" style="--pr:${p.ratio};--pl:${p.left ?? 1}">
       <p class="puzzle__title">${esc(p.title)}</p>
       <svg class="puzzle__defs" aria-hidden="true"><defs>
-        ${puzzleClips(p.ratio, p.left, p.tab, p.tabY)}
+        ${puzzleClips(p.ratio, p.left, p.tab)}
       </defs></svg>
       <div class="puzzle__board">
         <figure class="puzzle__slot" style="clip-path:url(#pz-slot)"><img src="${url(p.pieces[0].src)}" alt="${esc(p.pieces[0].alt)}" width="${Math.round(400 * (p.left ?? 1))}" height="${Math.round(400 * p.ratio)}" draggable="false"></figure>
