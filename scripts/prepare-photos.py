@@ -47,25 +47,32 @@ STICKERS = []
 
 # Trò ghép hình: một tấm ảnh chụp hai người, cắt đôi ở chỗ giữa hai người.
 # (nguồn, vị trí đường cắt 0..1, mép trái, mép phải, mép trên, mép dưới — đều tính theo tỉ lệ ảnh)
-# Mảnh trái cố định, mảnh phải kéo vào. Tai ghép (khai báo ở puzzle.tabs trong src/config.js) lồi sang trái
-# hoặc phải tối đa TAB_DEPTH bề ngang mảnh phải, nên mỗi mảnh lấy dư ra phía đường cắt đúng chừng đó.
-# Chạy xong, chép các số ratio, left, offset, cut in ra vào puzzle trong src/config.js.
+# Mảnh trái cố định, mảnh phải kéo vào. Tai ghép rộng 0.18 bề ngang mảnh phải.
+# Hai mảnh có thể rộng khác nhau để đường cắt nằm đúng chỗ mình muốn mà không phải cắt bớt người bên trái.
+# Chạy xong, chép ba giá trị tab, ratio và left in ra vào puzzle trong src/config.js.
 PUZZLE = ('anh-1.JPG', 0.532, 0.0, 0.995, 0.21, 0.94)
 PUZZLE_W = 400  # bề ngang mảnh phải (px)
-TAB_DEPTH = 0.09  # = 0.18 × size lớn nhất của các tai ghép
+# Tai ghép nằm ở mảnh nào: 'left' = mảnh phải có tai lồi sang trái, 'right' = mảnh trái có tai lồi sang phải.
+# Đường cắt thẳng luôn ở vị trí `cut`, tai ghép lấn sang phía bên kia.
+PUZZLE_TAB = 'left'
 
 
 def puzzle_pieces(img, cut, left, right, top, bottom):
     x_cut, x0, x1 = cut * img.width, left * img.width, right * img.width
     y0, y1 = top * img.height, bottom * img.height
-    w = (x1 - x_cut) / (1 - TAB_DEPTH)  # mảnh phải, gồm phần dư cho tai ghép lồi sang trái
-    d = TAB_DEPTH * w
-    lx1, rx0 = x_cut + d, x_cut - d
-    ratio, lw, off, c = (y1 - y0) / w, (lx1 - x0) / w, (rx0 - x0) / w, (x_cut - x0) / w
+    if PUZZLE_TAB == 'right':  # tai ở mảnh trái, lồi sang phải
+        w = x1 - x_cut  # mảnh phải
+        wl = x_cut + 0.18 * w - x0  # mảnh trái, gồm cả tai ghép
+        rx0 = x_cut
+    else:  # tai ở mảnh phải, lồi sang trái
+        w = (x1 - x_cut) / 0.82  # mảnh phải, gồm cả tai ghép
+        wl = x_cut - x0
+        rx0 = x_cut - 0.18 * w
+    ratio, lw = (y1 - y0) / w, wl / w
     h = round(PUZZLE_W * ratio)
-    a = img.crop((round(x0), round(y0), round(lx1), round(y1))).resize((round(PUZZLE_W * lw), h), Image.LANCZOS)
+    a = img.crop((round(x0), round(y0), round(x0 + wl), round(y1))).resize((round(PUZZLE_W * lw), h), Image.LANCZOS)
     b = img.crop((round(rx0), round(y0), round(x1), round(y1))).resize((PUZZLE_W, h), Image.LANCZOS)
-    print(f'puzzle: ratio: {ratio:.3f}, left: {lw:.3f}, offset: {off:.3f}, cut: {c:.3f}')
+    print(f"puzzle: tab: '{PUZZLE_TAB}', ratio: {ratio:.3f}, left: {lw:.3f}")
     return a, b
 
 
