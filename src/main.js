@@ -380,7 +380,7 @@ function calendarHtml() {
   </figure>`;
 }
 
-// Khung giờ mời theo link, ví dụ ?time=15 (xem venues[].sessions trong config.js).
+// Khung giờ mời theo link, ví dụ ?time=1730 (xem venues[].sessions trong config.js).
 const session = () => new URLSearchParams(window.location.search).get('time')?.trim().toLowerCase() ?? '';
 
 function detailsHtml() {

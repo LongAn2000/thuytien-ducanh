@@ -45,11 +45,11 @@ test('in ảnh, ghép hình mở khóa thông tin, thả tim và RSVP', async ({
   expect(errors).toEqual([]);
 });
 
-test('link ?time=15 đổi giờ tiệc nhà gái sang 15:00', async ({ page }) => {
+test('link ?time=1730 đổi giờ tiệc nhà gái sang 17:30', async ({ page }) => {
   const brideParty = page.locator('.details__venue').filter({ hasText: 'Tiệc cưới nhà gái' });
   await page.goto('/');
   await expect(brideParty).toContainText('05.12.2026 · 10:00');
-  await page.goto('/?time=15');
-  await expect(brideParty).toContainText('05.12.2026 · 15:00');
+  await page.goto('/?time=1730');
+  await expect(brideParty).toContainText('05.12.2026 · 17:30');
   await expect(page.locator('.details__venue').filter({ hasText: 'Lễ thành hôn' })).toContainText('10:00');
 });

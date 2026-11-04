@@ -35,4 +35,4 @@ Trên Windows: nhấp đúp `start.cmd`.
 Push lên nhánh `main` thì GitHub Actions (`.github/workflows/deploy.yml`) tự build và đăng lên GitHub Pages
 tại tên miền riêng **https://ducanhthuytien.online/** (khai báo trong `public/CNAME` và Settings → Pages;
 DNS ở PA Việt Nam: 4 bản ghi A `@` → 185.199.108–111.153, CNAME `www` → longan2000.github.io).
-Link khách mời khung 15:00 tiệc nhà gái: https://ducanhthuytien.online/?time=15
+Link khách mời khung 17:30 tiệc nhà gái: https://ducanhthuytien.online/?time=1730
