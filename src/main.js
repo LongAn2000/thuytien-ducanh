@@ -153,23 +153,24 @@ function initHero() {
 /* ---------- Gallery + Puzzle ---------- */
 
 // Tai ghép nằm giữa mép mảnh. Mảnh càng cao (ratio = cao/rộng) thì tai càng ngắn theo tỉ lệ để không bị kéo dài.
-// Mảnh trái rộng gấp `left` lần mảnh phải, nên tai ghép tính lại theo bề ngang của nó.
-// Mảnh trái rộng gấp `left` lần mảnh phải; hai mảnh chồng nhau 0.18 bề ngang mảnh phải.
-// tab = 'right': mảnh trái có tai lồi sang phải. tab = 'left': mảnh phải có tai lồi sang trái.
-function puzzleClips(ratio, left = 1, tab = 'right', tabY = 0.5) {
+// Toạ độ "bảng" tính theo bề ngang mảnh phải: mảnh trái nằm ở [0, left], mảnh phải ở [offset, offset + 1],
+// đường cắt thẳng ở x = cut. Mỗi tai ghép { y, dir, size }: y = vị trí theo chiều cao mảnh (0..1),
+// dir = 'left' (mảnh phải lồi sang trái) hoặc 'right' (mảnh trái lồi sang phải), size = cỡ (1 = tai to cũ).
+function puzzleClips({ ratio, left, offset, cut, tabs }) {
   const k = 1 / ratio;
-  const y = v => (tabY + (v - 0.5) * k).toFixed(4); // tai ghép đặt ở tabY (tỉ lệ chiều cao mảnh)
-  const x = v => (1 - (1 - v) / left).toFixed(4); // toạ độ trong dải chồng nhau → toạ độ mảnh trái
-  const [slot, piece] =
-    tab === 'left'
-      ? [
-          `M0,0 H1 V${y(0.35)} C${x(0.92)},${y(0.27)} ${x(0.82)},${y(0.37)} ${x(0.82)},${y(0.5)} C${x(0.82)},${y(0.63)} ${x(0.92)},${y(0.73)} 1,${y(0.65)} V1 H0 Z`,
-          `M0.18,0 H1 V1 H0.18 V${y(0.65)} C0.1,${y(0.73)} 0,${y(0.63)} 0,${y(0.5)} C0,${y(0.37)} 0.1,${y(0.27)} 0.18,${y(0.35)} Z`,
-        ]
-      : [
-          `M0,0 H${x(0.82)} V${y(0.35)} C${x(0.9)},${y(0.27)} 1,${y(0.37)} 1,${y(0.5)} C1,${y(0.63)} ${x(0.9)},${y(0.73)} ${x(0.82)},${y(0.65)} V1 H0 Z`,
-          `M0,0 H1 V1 H0 V${y(0.65)} C0.08,${y(0.73)} 0.18,${y(0.63)} 0.18,${y(0.5)} C0.18,${y(0.37)} 0.08,${y(0.27)} 0,${y(0.35)} Z`,
-        ];
+  const f = n => n.toFixed(4);
+  const seam = mapX => {
+    let d = `M${f(mapX(cut))},0`;
+    for (const t of [...tabs].sort((a, b) => a.y - b.y)) {
+      const s = (t.dir === 'right' ? 1 : -1) * t.size;
+      const X = dx => f(mapX(cut + s * dx));
+      const Y = dy => f(t.y + dy * t.size * k);
+      d += ` L${X(0)},${Y(-0.15)} C${X(0.08)},${Y(-0.23)} ${X(0.18)},${Y(-0.13)} ${X(0.18)},${Y(0)} C${X(0.18)},${Y(0.13)} ${X(0.08)},${Y(0.23)} ${X(0)},${Y(0.15)}`;
+    }
+    return `${d} L${f(mapX(cut))},1`;
+  };
+  const slot = `${seam(x => x / left)} L0,1 L0,0 Z`;
+  const piece = `${seam(x => x - offset)} L1,1 L1,0 Z`;
   return `<clipPath id="pz-slot" clipPathUnits="objectBoundingBox"><path d="${slot}"/></clipPath>
         <clipPath id="pz-piece" clipPathUnits="objectBoundingBox"><path d="${piece}"/></clipPath>`;
 }
@@ -185,13 +186,13 @@ function galleryHtml() {
       </figure>`,
     )
     .join('');
-  const puzzle = `<div class="puzzle__wrap" style="--pr:${p.ratio};--pl:${p.left ?? 1}">
+  const puzzle = `<div class="puzzle__wrap" style="--pr:${p.ratio};--pl:${p.left};--po:${p.offset}">
       <p class="puzzle__title">${esc(p.title)}</p>
       <svg class="puzzle__defs" aria-hidden="true"><defs>
-        ${puzzleClips(p.ratio, p.left, p.tab, p.tabY)}
+        ${puzzleClips(p)}
       </defs></svg>
       <div class="puzzle__board">
-        <figure class="puzzle__slot" style="clip-path:url(#pz-slot)"><img src="${url(p.pieces[0].src)}" alt="${esc(p.pieces[0].alt)}" width="${Math.round(400 * (p.left ?? 1))}" height="${Math.round(400 * p.ratio)}" draggable="false"></figure>
+        <figure class="puzzle__slot" style="clip-path:url(#pz-slot)"><img src="${url(p.pieces[0].src)}" alt="${esc(p.pieces[0].alt)}" width="${Math.round(400 * p.left)}" height="${Math.round(400 * p.ratio)}" draggable="false"></figure>
         <div class="puzzle__piece" style="clip-path:url(#pz-piece);--fx:0.52;--fy:${(0.2 / p.ratio).toFixed(3)}" role="button" tabindex="0" aria-disabled="false"
           aria-label="${esc(p.pieces[1].alt)} — kéo hoặc dùng phím mũi tên để ghép vào mảnh bên trái"><img src="${url(p.pieces[1].src)}" alt="${esc(p.pieces[1].alt)}" width="400" height="${Math.round(400 * p.ratio)}" draggable="false"></div>
       </div>

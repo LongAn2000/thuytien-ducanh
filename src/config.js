@@ -50,14 +50,18 @@ export const puzzle = {
   prompt: 'Kéo mảnh bên phải cho khớp vào mảnh bên trái',
   done: 'Khớp rồi! Thông tin lễ cưới mở ngay bên dưới nha.',
   locked: 'Ghép hai mảnh ảnh phía trên để mở phần này nha',
-  // Một tấm ảnh cắt đôi ở giữa hai người (scripts/prepare-photos.py in ra ba giá trị này).
-  // tab = mảnh phải có tai lồi sang trái ('left') hay mảnh trái có tai lồi sang phải ('right'),
-  // ratio = cao/rộng của mảnh phải, left = bề ngang mảnh trái so với mảnh phải.
-  tab: 'left',
-  ratio: 1.939,
-  left: 0.942,
-  // Vị trí tai ghép theo chiều cao mảnh (0 = trên cùng, 1 = dưới cùng): đặt ở khoảng nền trống giữa hai người.
-  tabY: 0.6,
+  // Một tấm ảnh cắt đôi ở giữa hai người. scripts/prepare-photos.py in ra ratio, left, offset, cut
+  // (tính theo bề ngang mảnh phải: chiều cao, bề ngang mảnh trái, mép trái mảnh phải, vị trí đường cắt).
+  ratio: 2.152,
+  left: 1.136,
+  offset: 0.956,
+  cut: 1.046,
+  // Tai ghép: y = vị trí theo chiều cao mảnh (0 = trên cùng, 1 = dưới cùng), dir = hướng lồi,
+  // size = cỡ (0.18 × size phải ≤ TAB_DEPTH trong scripts/prepare-photos.py).
+  tabs: [
+    { y: 0.164, dir: 'right', size: 0.5 }, // giữa tay trên cao và đầu hai người
+    { y: 0.74, dir: 'left', size: 0.5 }, // nền trống phía dưới, giữa áo chú rể và voan cô dâu
+  ],
   pieces: [
     { src: 'photos/puzzle-left.webp', alt: 'Chú rể' },
     { src: 'photos/puzzle-right.webp', alt: 'Cô dâu' },
