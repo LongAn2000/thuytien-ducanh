@@ -89,7 +89,7 @@ export const families = [
 // sessions: { <time>: '<dòng giờ khác>' } — link thiệp thêm ?time=<time> thì hiện dòng giờ đó thay cho hall.
 export const venues = [
   {
-    title: 'Lễ thành hôn',
+    title: 'Lễ thành hôn & Tiệc cưới nhà trai',
     name: 'Trung tâm văn hóa xã Thanh Trì',
     hall: 'Chủ Nhật 06.12.2026 · 10:00',
     lunar: 'Tức ngày 28 tháng 10 năm Bính Ngọ',
